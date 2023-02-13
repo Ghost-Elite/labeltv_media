@@ -80,8 +80,15 @@ class _YtoubePlayerPageState extends State<YtoubePlayerPage> {
     return YoutubePlayerBuilder(
       onExitFullScreen: () {
         // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
-        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+        //SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+
       },
+      /*onEnterFullScreen: () {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight
+        ]);
+      },*/
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,

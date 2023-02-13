@@ -307,7 +307,7 @@ class _TvPageScreenState extends State<TvPageScreen> with WidgetsBindingObserver
     // TODO: implement dispose
     super.dispose();
     //betterPlayerController!.dispose();
-    betterPlayerController!.addEventsListener((event) {
+    /*betterPlayerController!.addEventsListener((event) {
       if(betterPlayerController!.isFullScreen){
         SystemChrome.setPreferredOrientations(
             [
@@ -315,7 +315,7 @@ class _TvPageScreenState extends State<TvPageScreen> with WidgetsBindingObserver
             ]
         );
       }
-    });
+    });*/
   }
   @override
   Widget build(BuildContext context) {

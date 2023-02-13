@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:labeltv/pages/mobile_home_screen.dart';
 import 'package:labeltv/pages/splash.dart';
-import 'package:labeltv/pages/test.dart';
 import 'package:labeltv/pages/web_home_screen.dart';
 import 'package:labeltv/utils/colors.dart';
 
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: backgroundColor,
       ),
-      home:  YoutubeAppDemo(),
+      home: SplashScreen(),
     );
   }
 }

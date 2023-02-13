@@ -389,7 +389,9 @@ class _MobileLayoutScreenState extends State<MobileLayoutScreen>{
                                       ytResult: widget.ytResult,
                                       enabled: _enabled,
 
-                                    )),
+                                    )
+
+                                ),
                                     (Route<dynamic> route) => true);
                           }  else{
 
@@ -583,13 +585,9 @@ class _MobileLayoutScreenState extends State<MobileLayoutScreen>{
         if (_enabled ==false) {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (context) => /*YtoubePlayerPage(
-                    videoId: widget.ytResult[index].url,
-                    title: widget.ytResult[index].title.replaceAll('&quot;', '"').replaceAll("&#39;", "'").replaceAll("&amp;", "&"),
-                    position: index,
-                    ytResult: widget.ytResult, videos: [],
-                    enabled: _enabled,
-                  )*/ YoutubeLecteurPlayer(
+                  builder: (context) =>
+
+                  YoutubeLecteurPlayer(
                     idVideo: video.id,
                     title: video.title!.replaceAll('&quot;', '"').replaceAll("&#39;", "'").replaceAll("&amp;", "&").replaceAll("//", "").replaceAll("🔴", "").replaceAll("🛑", "").replaceAll("#", ""),
                     isLoading: _isLoading,

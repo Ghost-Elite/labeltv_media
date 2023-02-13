@@ -104,35 +104,59 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
 
     getChannelInfo();
   }
+  @override
+  void dispose() {
+
+    super.dispose();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
     //print(videoIds);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: appBarColor,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: textAppBarColor),
-            onPressed: () {
-              //PlayerInit(widget.dataUrls);
-              //PlayerInit();
-              Navigator.of(context).pop();
-            }
-        ),
-        title: Text('Playlist',style: TextStyle(color: textAppBarColor,fontSize: 24,fontWeight: FontWeight.bold),),
+    return OrientationBuilder(
+      builder: (context, orientation){
+        return orientation==Orientation.portrait? Scaffold(
+          appBar:  AppBar(
+            backgroundColor: appBarColor,
+            elevation: 0,
+            centerTitle: true,
+            leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios, color: textAppBarColor),
+                onPressed: () {
+                  //PlayerInit(widget.dataUrls);
+                  //PlayerInit();
+                  Navigator.of(context).pop();
+                }
+            ),
+            title: Text('Playlist',style: TextStyle(color: textAppBarColor,fontSize: 24,fontWeight: FontWeight.bold),),
 
-      ),
-      body: _loading! ? Center(child: CircularProgressIndicator(color: textAppBarColor,backgroundColor: textAppBarColor,)) : AllPlayListScreen(
-        data: videoIds,
-        ytResult: widget.ytResult,
-        title: title,
-        videos: videos,
-        loading: _loading,
-        position: widget.position,
-      ),
+          ),
+          body: _loading! ? Center(child: CircularProgressIndicator(color: textAppBarColor,backgroundColor: textAppBarColor,)) : AllPlayListScreen(
+            data: videoIds,
+            ytResult: widget.ytResult,
+            title: title,
+            videos: videos,
+            loading: _loading,
+            position: widget.position,
+          ),
+        ): Scaffold(
+          body: _loading! ? Center(child: CircularProgressIndicator(color: textAppBarColor,backgroundColor: textAppBarColor,)) : AllPlayListScreen(
+            data: videoIds,
+            ytResult: widget.ytResult,
+            title: title,
+            videos: videos,
+            loading: _loading,
+            position: widget.position,
+          ),
+        );
+      },
     );
+
+
   }
 
 }
@@ -226,17 +250,14 @@ class _AllPlayListState extends State<AllPlayListScreen> {
     // Pauses video while navigating to next page.
     _controller!.pause();
     super.deactivate();
-    SystemChrome.setPreferredOrientations(
-        [
-          DeviceOrientation.landscapeRight
-        ]
-    );
+
   }
 
   @override
   void dispose() {
-    _controller!.dispose();
     super.dispose();
+
+    _controller!.dispose();
   }
 
 
@@ -245,18 +266,27 @@ class _AllPlayListState extends State<AllPlayListScreen> {
     Wakelock.enable();
     return test.length == 0
         ? Scaffold(
+
       body: Center(child: Text('pas de video disponible ',style: TextStyle(color: textAppBarColor),
+          ),
         ),
-      ),
-    )
+      )
         : YoutubePlayerBuilder(
           onExitFullScreen: () {
           // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
           SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-        },
-        onEnterFullScreen: (){
+            /*SystemChrome.setPreferredOrientations([
+              DeviceOrientation.portraitUp,
+              DeviceOrientation.portraitDown
+            ]);*/
 
         },
+      onEnterFullScreen: () {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight
+        ]);
+      },
       player: YoutubePlayer(
         controller: _controller!,
         showVideoProgressIndicator: true,

@@ -83,12 +83,20 @@ class _YoutubeLecteurPlayerState extends State<YoutubeLecteurPlayer> {
     // Pauses video while navigating to next page.
     _controller.pause();
     super.deactivate();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+
+    ]);
   }
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+
+    ]);
   }
 
   @override
@@ -98,10 +106,21 @@ class _YoutubeLecteurPlayerState extends State<YoutubeLecteurPlayer> {
       onExitFullScreen: () {
         // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
         SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+        /*SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+
+        ]);*/
 
       },
 
       // get string variable
+      /*onEnterFullScreen: () {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+        ]);
+      },*/
 
       player: YoutubePlayer(
         controller: _controller,
