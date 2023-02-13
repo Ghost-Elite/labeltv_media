@@ -1,0 +1,291 @@
+<html>
+<head>
+    <meta name="color-scheme" content="light dark">
+    <style id="jfStyleEl">body {
+  background-color: #fff;
+  user-select: text;
+  overflow-y: scroll !important;
+  margin: 0;
+  position: relative;
+  padding-top: 1px; /* hack to prevent margin collapse in 'Raw' */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#optionBar {
+  user-select: none;
+  display: block;
+  position: absolute;
+  top: 13px;
+  right: 15px;
+}
+#buttonFormatted,
+#buttonPlain {
+  border-radius: 2px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  background: linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+  border: 1px solid #aaa;
+  color: #444;
+  font-size: 13px;
+  /* text-transform: uppercase; */
+  margin-bottom: 0px;
+  min-width: 4em;
+  padding: 3px 0;
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  width: 80px;
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
+}
+#buttonFormatted {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#buttonPlain {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+:is(#buttonPlain, #buttonFormatted):not(.selected):hover {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  background: #ebebeb linear-gradient(#fefefe, #f8f8f8 40%, #e9e9e9);
+  border-color: #999;
+  color: #222;
+}
+:is(#buttonPlain, #buttonFormatted):active {
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+  background: #ebebeb linear-gradient(#f4f4f4, #efefef 40%, #dcdcdc);
+  color: #333;
+}
+:is(#buttonPlain, #buttonFormatted).selected {
+  box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.2);
+  background: #ebebeb linear-gradient(#e4e4e4, #dfdfdf 40%, #dcdcdc);
+  color: #333;
+}
+:is(#buttonPlain, #buttonFormatted):focus {
+  outline: 0;
+}
+.entry {
+  display: block;
+  padding-left: 20px;
+  margin-left: -20px;
+  position: relative;
+}
+#jsonFormatterParsed {
+  padding-left: 28px;
+  padding-top: 6px;
+  line-height: 1.5;
+}
+#jsonFormatterRaw {
+  padding: 36px 10px 5px;
+}
+.collapsed {
+  white-space: nowrap;
+}
+.collapsed > .blockInner {
+  display: none;
+}
+.collapsed > .ell:after {
+  content: '…';
+  font-weight: bold;
+}
+.collapsed > .ell {
+  margin: 0 4px;
+  color: #888;
+}
+.collapsed .entry {
+  display: inline;
+}
+
+.collapsed:after {
+  content: attr(data-size);
+  color: #aaa;
+}
+
+.e {
+  width: 20px;
+  height: 18px;
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 1px;
+  color: black;
+  z-index: 5;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.15;
+}
+
+.e::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 0 4px 6.9px;
+  border-color: transparent transparent transparent currentColor;
+  transform: rotate(90deg) translateY(1px);
+}
+
+.collapsed > .e::after {
+  transform: none;
+}
+
+.e:hover {
+  opacity: 0.35;
+}
+.e:active {
+  opacity: 0.5;
+}
+.collapsed .entry .e {
+  display: none;
+}
+.blockInner {
+  display: block;
+  padding-left: 24px;
+  border-left: 1px dotted #bbb;
+  margin-left: 2px;
+}
+#jsonFormatterParsed {
+  color: #444;
+}
+
+.entry {
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.b {
+  font-weight: bold;
+}
+.s {
+  color: #0b7500;
+  word-wrap: break-word;
+}
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover,
+a:active {
+  text-decoration: underline;
+  color: #050;
+}
+.bl,
+.nl,
+.n {
+  font-weight: bold;
+  color: #1a01cc;
+}
+.k {
+  color: #000;
+}
+
+[hidden] {
+  display: none !important;
+}
+span {
+  white-space: pre-wrap;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#spinner {
+  animation: spin 2s linear infinite;
+}
+
+
+@media (prefers-color-scheme: dark) {
+body {
+  background-color: #1a1a1a;
+  color: #eee;
+  -webkit-font-smoothing: antialiased;
+}
+
+a:hover,
+a:active {
+  color: hsl(114, 90%, 55%);
+}
+
+#optionBar {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#jsonFormatterParsed {
+  color: #b6b6b6;
+}
+
+.blockInner {
+  border-color: #4d4d4d;
+}
+
+.k {
+  color: #fff;
+}
+
+.s {
+  color: hsl(114, 100%, 35%);
+}
+
+.bl,
+.nl,
+.n {
+  color: hsl(200, 100%, 70%);
+}
+
+.e {
+  color: #fff;
+  opacity: 0.25;
+}
+
+.e:hover {
+  opacity: 0.45;
+}
+.e:active {
+  opacity: 0.6;
+}
+
+.collapsed:after {
+  color: #707070;
+}
+
+:is(#buttonPlain, #buttonFormatted) {
+  text-shadow: none;
+  border: 0;
+  background: hsl(200, 35%, 60%);
+  box-shadow: none;
+  color: #000;
+}
+
+:is(#buttonPlain, #buttonFormatted):not(.selected):hover {
+  box-shadow: none;
+  background: hsl(200, 50%, 70%);
+  color: #000;
+}
+
+:is(#buttonPlain, #buttonFormatted).selected {
+  box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.7);
+  background: hsl(200, 40%, 60%);
+  color: #000;
+}
+
+}</style></head><body><div id="optionBar"><button id="buttonPlain"><span>Raw</span></button><button id="buttonFormatted" class="selected"><span>Parsed</span></button></div><div id="jsonFormatterParsed"><span class="entry arrElem" data-size=" // 1 item"><span class="e"></span><span class="b">{</span><span class="ell"></span><span class="blockInner"><span class="entry objProp">"<span class="k">app_description</span>":&nbsp;<span class="s">"<span>&lt;p&gt;&lt;b&gt;Mot du président&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;L’Afrique s’affirme de plus en plus comme le continent de la croissance et de toutes les nouvelles opportunités.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;Cette situation est une interpellation sur le nécessaire accompagnement audiovisuel du développement de l’Afrique en général, de son image, de son émergence. Elle remet en lumière l’exigence d’entrée sur scène de véritables projets panafricains notamment de groupe multimédia.&amp;nbsp;&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Notre projet s’inscrit dans un contexte environnemental marqué par les réalités suivantes :&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;- L’Afrique reste marginale dans l’industrie des contenus, de la production, de l’édition et de la distribution des programmes et services de presse, radio, télévision.&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- L’Afrique, malgré l’émergence de nouvelles entités et offres médiatiques, malgré une présence satellitaire accrue de chaînes africaines, n’a pas encore atteint la vitesse de croisière nécessaire et exploité toutes les potentialités et opportunités qu’offre l’économie médiatique.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- Malgré les revendications et proclamations, aucune des structures médiatiques continentales ne réunit encore les conditions de « pan-africanité » : la plupart des chaînes de télévision à vocation panafricaine opérant et émettant à partir de l’Europe, en dehors du continent cible, au moment où l’audiovisuel et les médias internationaux se plaisent à déformer l’image et la perception de l’Afrique.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- La promotion d’outils et de relais de communication autres que les médias et organes publics traditionnels est nécessaire pour encourager la créativité, la production de contenus innovants et originaux mais aussi pour aider à structurer une industrie audiovisuelle dynamique, pourvoyeuse d’emplois, viable et génératrice de vocations et de revenus.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;- L’Afrique, malgré les clichés, demeure au devant de la scène internationale et est appelé à multiplier, à diversifier, à fédérer et à rendre plus visibles ses moyens de communication.&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- L’émergence du continent et son affirmation ne pourront être une réalité durable sans un outil, une base pluri-médiatique, notamment audiovisuelle, à vocation locale, panafricaine et internationale.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- Le Gabon apparait comme le pays africain qui présente le plus de prémisses et d’atouts en matière de projets médiatiques panafricains et peut en conséquence s’affirmer comme la plateforme continentale par excellence dans ce domaine.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;Ce projet constitue ainsi une contribution et une mise en oeuvre d’une vision au service du Gabon et de l’Afrique. Il s’agit d’un projet ouvert à des participations et partenariats ciblés afin d’en faire rapidement un outil et une plateforme de référence en Afrique et dans le monde.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Notre vision&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Le grand défi de l’Afrique à l’heure du numérique, donc de la profusion de signaux disponibles, est celui des contenus originaux, pertinents, conformes aux nouvelles habitudes de consommation de tous les publics du fait des technologies en place et en usage. La création du Groupe audiovisuel au Gabon est en elle-même, dans sa conception comme dans sa mise en oeuvre, un projet intégré et intégrateur.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Label RADIO TV entend se positionner comme une Voix et une Vitrine de l’Afrique Emergente avec un enracinement au Coeur du Continent et une ouverture aux diverses aires géographiques et culturelles. Le panafricanisme commence par la localisation avec un ancrage sur le continent.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Il se traduit aussi dans la composition et la diversité des effectifs et dans les contenus.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Notre offre s’inscrit dans l’optique d’une vraie grappe d’excellence en matière de Services à Valeur Ajoutée, notamment en matière d’infrastructures et de contenus multimédia sous tous les supports existants ou à venir mais qui tient également compte du boom extraordinaire constaté dans la téléphonie mobile en Afrique : Elle prend en compte les enjeux stratégiques de ce secteur essentiel de la communication par son impact dans la vie quotidienne, à l’époque des profondes mutations technologiques et de la convergence.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Elle intègre les récents développements en Afrique, l’entrée en scène de nouveaux acteurs, mais aussi la réalité de la marginalisation du continent dans l’industrie des contenus, de la production, de l’édition et de la distribution des programmes et services de presse, radio, télévision, nouveaux services à valeur ajoutée.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Elle fédère un groupe constitué des meilleurs professionnels du secteur (presse, agence, radio, TV, multimédia, etc.), prêts à renoncer à leurs projets et à nous rejoindre pour construire ensemble une plateforme d’excellence.&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;</span>"</span></span></span><span class="b">}</span></span></div><div hidden="" id="jsonFormatterRaw"><pre style="word-wrap: break-word; white-space: pre-wrap;">{
+    "app_description": "&lt;p&gt;&lt;b&gt;Mot du président&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;L’Afrique s’affirme de plus en plus comme le continent de la croissance et de toutes les nouvelles opportunités.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;Cette situation est une interpellation sur le nécessaire accompagnement audiovisuel du développement de l’Afrique en général, de son image, de son émergence. Elle remet en lumière l’exigence d’entrée sur scène de véritables projets panafricains notamment de groupe multimédia.&amp;nbsp;&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Notre projet s’inscrit dans un contexte environnemental marqué par les réalités suivantes :&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;- L’Afrique reste marginale dans l’industrie des contenus, de la production, de l’édition et de la distribution des programmes et services de presse, radio, télévision.&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- L’Afrique, malgré l’émergence de nouvelles entités et offres médiatiques, malgré une présence satellitaire accrue de chaînes africaines, n’a pas encore atteint la vitesse de croisière nécessaire et exploité toutes les potentialités et opportunités qu’offre l’économie médiatique.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- Malgré les revendications et proclamations, aucune des structures médiatiques continentales ne réunit encore les conditions de « pan-africanité » : la plupart des chaînes de télévision à vocation panafricaine opérant et émettant à partir de l’Europe, en dehors du continent cible, au moment où l’audiovisuel et les médias internationaux se plaisent à déformer l’image et la perception de l’Afrique.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- La promotion d’outils et de relais de communication autres que les médias et organes publics traditionnels est nécessaire pour encourager la créativité, la production de contenus innovants et originaux mais aussi pour aider à structurer une industrie audiovisuelle dynamique, pourvoyeuse d’emplois, viable et génératrice de vocations et de revenus.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;- L’Afrique, malgré les clichés, demeure au devant de la scène internationale et est appelé à multiplier, à diversifier, à fédérer et à rendre plus visibles ses moyens de communication.&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- L’émergence du continent et son affirmation ne pourront être une réalité durable sans un outil, une base pluri-médiatique, notamment audiovisuelle, à vocation locale, panafricaine et internationale.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;- Le Gabon apparait comme le pays africain qui présente le plus de prémisses et d’atouts en matière de projets médiatiques panafricains et peut en conséquence s’affirmer comme la plateforme continentale par excellence dans ce domaine.&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;Ce projet constitue ainsi une contribution et une mise en oeuvre d’une vision au service du Gabon et de l’Afrique. Il s’agit d’un projet ouvert à des participations et partenariats ciblés afin d’en faire rapidement un outil et une plateforme de référence en Afrique et dans le monde.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Notre vision&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Le grand défi de l’Afrique à l’heure du numérique, donc de la profusion de signaux disponibles, est celui des contenus originaux, pertinents, conformes aux nouvelles habitudes de consommation de tous les publics du fait des technologies en place et en usage. La création du Groupe audiovisuel au Gabon est en elle-même, dans sa conception comme dans sa mise en oeuvre, un projet intégré et intégrateur.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Label RADIO TV entend se positionner comme une Voix et une Vitrine de l’Afrique Emergente avec un enracinement au Coeur du Continent et une ouverture aux diverses aires géographiques et culturelles. Le panafricanisme commence par la localisation avec un ancrage sur le continent.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Il se traduit aussi dans la composition et la diversité des effectifs et dans les contenus.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Notre offre s’inscrit dans l’optique d’une vraie grappe d’excellence en matière de Services à Valeur Ajoutée, notamment en matière d’infrastructures et de contenus multimédia sous tous les supports existants ou à venir mais qui tient également compte du boom extraordinaire constaté dans la téléphonie mobile en Afrique : Elle prend en compte les enjeux stratégiques de ce secteur essentiel de la communication par son impact dans la vie quotidienne, à l’époque des profondes mutations technologiques et de la convergence.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Elle intègre les récents développements en Afrique, l’entrée en scène de nouveaux acteurs, mais aussi la réalité de la marginalisation du continent dans l’industrie des contenus, de la production, de l’édition et de la distribution des programmes et services de presse, radio, télévision, nouveaux services à valeur ajoutée.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Elle fédère un groupe constitué des meilleurs professionnels du secteur (presse, agence, radio, TV, multimédia, etc.), prêts à renoncer à leurs projets et à nous rejoindre pour construire ensemble une plateforme d’excellence.&lt;/p&gt;&lt;p&gt;&lt;span style=\"font-size: 1rem; letter-spacing: 0.01rem;\"&gt;&lt;br&gt;&lt;/span&gt;&lt;/p&gt;"
+}
+</pre>
+</div>
+</body>
+</html>
